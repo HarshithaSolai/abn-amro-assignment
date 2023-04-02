@@ -1,16 +1,9 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
-
+import { render, getByTestId} from "@testing-library/react";
 import App from "./App";
 
-test("renders header, footer and routes", () => {
-  const { getByTestId } = render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-
+test("renders header and footer", () => {
+  const { getByTestId } = render(<App />);
   const headerElement = getByTestId("header");
   expect(headerElement).toBeInTheDocument();
 

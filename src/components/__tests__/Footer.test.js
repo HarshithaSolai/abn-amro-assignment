@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Footer from "./Footer";
-import { GITHUB_LINK } from "../utils/config";
+import Footer from "../Footer";
+import { GITHUB_LINK } from "../../utils/config";
 
 test("should render GitHub link with correct URL and text content", () => {
   const { getByTestId } = render(<Footer />);
