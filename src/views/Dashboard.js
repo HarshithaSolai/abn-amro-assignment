@@ -10,7 +10,6 @@ import { GET_URL_SHOWSLIST } from "../utils/config";
 const Dashboard = () => {
   const [shows, setShows] = useState([]);
   const [filteredShows, setFilteredShows] = useState([]);
-  const [genreFilter, setGenreFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("desc");
 
   const sortShows = (sortOrder, data) => {
@@ -47,7 +46,6 @@ const Dashboard = () => {
 
   const handleGenreFilter = (event) => {
     const selectedGenre = event.target.value;
-    setGenreFilter(selectedGenre);
     if (selectedGenre === "all") {
       setFilteredShows(shows);
     } else {

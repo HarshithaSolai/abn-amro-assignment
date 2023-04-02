@@ -37,7 +37,7 @@ const SearchShows = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setShowSuggestion(true)}
           onBlur={() => {
-            const timer = setTimeout(() => {
+            setTimeout(() => {
               setShowSuggestion(false);
             }, 300);
           }}

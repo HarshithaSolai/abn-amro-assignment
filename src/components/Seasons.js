@@ -10,7 +10,7 @@ const Seasons = ({ showId }) => {
 
   useEffect(() => {
     getSeasonInfo();
-  }, []);
+  });
 
   const getSeasonInfo = async () => {
     try {

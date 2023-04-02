@@ -8,7 +8,7 @@ const Episodes = ({ showId }) => {
 
   useEffect(() => {
     getEpisodeInfo();
-  }, []);
+  });
 
   const getEpisodeInfo = async () => {
     try {
