@@ -9,6 +9,7 @@
 - [Requirement Analysis](#requirement-analysis)
 - [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
+- [Programming patterns](#programming-patterns)
 - [Design](#design)
 - [API Endpoints](#api-endpoints)
 - [Live Demo](#live-demo)
