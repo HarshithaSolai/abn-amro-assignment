@@ -66,7 +66,8 @@ Based on the requirements, I am planning to use Client-Side Rendering Architectu
 
 ### UI Hierarchy
   
-  ```App
+  ```
+  App
       Header 
       Dashboard
         SearchShows 
@@ -79,7 +80,8 @@ Based on the requirements, I am planning to use Client-Side Rendering Architectu
           Season
             [Episodes]
               Episode
-      Footer```
+      Footer
+  ```
       
 
 ## API Endpoints 
