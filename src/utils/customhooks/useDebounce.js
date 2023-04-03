@@ -1,18 +1,18 @@
-import { useRef, useCallback } from "react";
-import { DEBOUNCE_DELAY } from "../config";
 
-export const useDebounce = (callback) => {
-  const debounceTimer = useRef();
 
-  const debouncedCallback = useCallback(
-    (...args) => {
-      clearTimeout(debounceTimer.current);
-      debounceTimer.current = setTimeout(() => {
-        callback(...args);
-      }, DEBOUNCE_DELAY);
-    },
-    [callback]
-  );
+import { DEBOUNCE_DELAY } from "../../utils/config";
 
-  return debouncedCallback;
+export const useDebounce = (callback, delay) => {
+  let timerId;
+  
+  return (...args) => {
+    clearTimeout(timerId);
+    
+    timerId = setTimeout(() => {
+      callback(...args);
+    }, delay);
+  };
 };
+
+
+

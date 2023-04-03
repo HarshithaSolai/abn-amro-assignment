@@ -12,6 +12,15 @@ const Dashboard = () => {
   const [filteredShows, setFilteredShows] = useState([]);
   const [sortOrder, setSortOrder] = useState("desc");
 
+  let availableGenres = new Set();
+  if (shows && shows.length > 0) {
+    availableGenres = shows.reduce((acc, show) => {
+      show.genres.forEach((genre) => acc.add(genre));
+      return acc;
+    }, new Set());
+  }
+
+ 
   const sortShows = (sortOrder, data) => {
     return [...data].sort((a, b) =>
       sortOrder === "asc"
@@ -25,8 +34,7 @@ const Dashboard = () => {
       const response = await fetch(GET_URL_SHOWSLIST);
       const data = await response.json();
       setShows(data);
-      const sorted = sortShows(sortOrder, data);
-      setFilteredShows(sorted); // Display the shows in descending order of ratings when the page loads
+      setFilteredShows(data);
     } catch(error){
       console.log(error);
     }
@@ -36,23 +44,24 @@ const Dashboard = () => {
     fetchShows();
   }, []);
 
-  let availableGenres = new Set();
-  if (shows && shows.length > 0) {
-    availableGenres = shows.reduce((acc, show) => {
-      show.genres.forEach((genre) => acc.add(genre));
-      return acc;
-    }, new Set());
-  }
+  useEffect(() => { 
+    if (filteredShows && filteredShows.length > 0) {
+      const sorted = sortShows(sortOrder, filteredShows);
+      setFilteredShows(sorted);
+    }
+  }, [filteredShows, sortOrder]);
 
   const handleGenreFilter = (event) => {
     const selectedGenre = event.target.value;
     if (selectedGenre === "all") {
-      setFilteredShows(shows);
+      const sorted = sortShows(sortOrder, shows);
+      setFilteredShows(sorted);
     } else {
       const filtered = shows.filter((show) =>
         show.genres.includes(selectedGenre)
       );
-      setFilteredShows(filtered);
+      const sorted = sortShows(sortOrder, filtered);
+      setFilteredShows(sorted);
     }
   };
 

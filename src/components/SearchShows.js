@@ -16,13 +16,15 @@ const SearchShows = () => {
     }
   };
 
-  const debouncedSearch = useDebounce(getSearchResults);
+  const debouncedSearch = useDebounce(getSearchResults, 300);
 
   useEffect(() => {
-    if (searchQuery !== "") {
-      debouncedSearch();
-    }
-  }, [searchQuery, debouncedSearch]);
+    //we have to make this call after 200ms
+    const timer = setTimeout(() => {
+      getSearchResults();
+    }, 200);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   return (
     <div className="flex gap-1">
@@ -37,13 +39,13 @@ const SearchShows = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setShowSuggestion(true)}
           onBlur={() => {
-            setTimeout(() => {
+            const timer = setTimeout(() => {
               setShowSuggestion(false);
             }, 300);
           }}
         />
 
-        {searchQuery.length !== 0 && showSuggestion &&  suggestions && (
+        {searchQuery.length !== 0 && showSuggestion  && (
           <div className=" bg-white border border-abnamro-yellow w-full  absolute top-[30px] z-20">
             <ul>
               {suggestions.map((suggestion, index) => {

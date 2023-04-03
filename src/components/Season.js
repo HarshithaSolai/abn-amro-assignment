@@ -2,7 +2,7 @@ import React from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import Episodes from "./Episodes";
 
-const Season = ({ showId, season, setIsVisible, isVisible }) => {
+const Season = ({ season, setIsVisible, isVisible }) => {
   return (
     <div className="flex flex-col pl-5 pt-2" key={season.number}>
       <div className="flex items-center justify-between">
@@ -19,7 +19,7 @@ const Season = ({ showId, season, setIsVisible, isVisible }) => {
       </div>
       {isVisible && (
         <div className="flex flex-col justify-evenly">
-          <Episodes showId={showId}/>
+          <Episodes seasonId={season.id}/>
         </div>
       )}
     </div>

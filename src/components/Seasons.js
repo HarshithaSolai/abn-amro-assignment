@@ -10,7 +10,7 @@ const Seasons = ({ showId }) => {
 
   useEffect(() => {
     getSeasonInfo();
-  });
+  },[]);
 
   const getSeasonInfo = async () => {
     try {
@@ -23,13 +23,13 @@ const Seasons = ({ showId }) => {
   };
 
   return (
+    
     <div>
       <h2 className="p-5 mt-2.5 text-3xl font-semibold text-abnamro-green">Information about Seasons and Episodes</h2>
       {seasons.map((season) => (
         <Season
           key={season.id}
           season={season}
-          showId={showId}
           isVisible={visibleSeason === season.id}
           setIsVisible={(display) => {
             if (display) {

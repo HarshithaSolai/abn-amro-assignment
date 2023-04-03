@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import ShowDetails from "../components/ShowDetails";
 import Seasons from "../components/Seasons";
 import { GET_URL_SHOWSLIST } from "../utils/config";
+import { EpisodesProvider } from "../utils/context/EpisodesContext";
 
 const ShowInfo = () => {
   const params = useParams();
@@ -35,8 +36,9 @@ const ShowInfo = () => {
           <ShowDetails {...show} />
         </div>
         <div className="card-container w-[70%] sm:w-auto xsm:w-auto mob:w-auto">
-          <Seasons showId={showId} />{" "}
-          {/* Props Drilling - Passing props from parent to child components */}
+          <EpisodesProvider>
+            <Seasons showId={showId} />{" "}
+          </EpisodesProvider>
         </div>
       </div>
     </React.Fragment>

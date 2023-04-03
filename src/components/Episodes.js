@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { GET_URL_EPISODES } from "../utils/config";
+import React, { useEffect, useState, useContext } from "react";
 import Episode from "./Episode";
+import { EpisodesContext } from "../utils/context/EpisodesContext";
 
-const Episodes = ({ showId }) => {
-  const [episodes, setepisodes] = useState([]);
+const Episodes = ({ seasonId }) => {
+  const { episodesData, fetchEpisodesData } = useContext(EpisodesContext);
+
   const [visibleEpisode, setVisibleEpisode] = useState(""); //Initially all episodes accordion are closed
 
   useEffect(() => {
-    getEpisodeInfo();
-  });
-
-  const getEpisodeInfo = async () => {
-    try {
-      const response = await fetch(`${GET_URL_EPISODES}/${showId}/episodes`);
-      const res_data = await response.json();
-      setepisodes(res_data);
-    } catch (error) {
-      console.log(error);
+    // Fetch episodes data only if it hasn't been stored in context yet
+    if (!episodesData || !episodesData[seasonId]) {
+      fetchEpisodesData(seasonId);
     }
-  };
+  }, [seasonId]);
+
+  const episodes = episodesData && episodesData[seasonId] ? episodesData[seasonId] : [];
 
   return (
     <div>
