@@ -30,7 +30,7 @@ describe("ShowInfo", () => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
     });
 
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
+    expect(screen.getByText("No data found...")).toBeInTheDocument();
 
     waitFor(async () => {
       const showDetails = await screen.getByTestId("show-details");

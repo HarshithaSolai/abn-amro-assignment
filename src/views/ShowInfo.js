@@ -4,6 +4,7 @@ import ShowDetails from "../components/ShowDetails";
 import Seasons from "../components/Seasons";
 import { GET_URL_SHOWSLIST } from "../utils/config";
 import { EpisodesProvider } from "../utils/context/EpisodesContext";
+import { TransitionState } from "../components/TransitionState";
 
 const ShowInfo = () => {
   const params = useParams();
@@ -23,10 +24,8 @@ const ShowInfo = () => {
     getShowInfo();
   }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
-  
-
   return !show ? (
-    <>Loading...</>
+    <TransitionState type="no-data" />
   ) : (
     <React.Fragment>
       <div className="container flex justify-around sm:flex-col xsm:flex-col mob:flex-col">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SEARCH_BY_SHOWNAME } from "../utils/config";
+import { SEARCH_BY_SHOWNAME, DEBOUNCE_DELAY } from "../utils/config";
 import { Link } from "react-router-dom";
 
 const SearchShows = () => {
@@ -20,7 +20,7 @@ const SearchShows = () => {
     //we have to make this call after 200ms
     const timer = setTimeout(() => {
       getSearchResults();
-    }, 200);
+    }, DEBOUNCE_DELAY);
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
