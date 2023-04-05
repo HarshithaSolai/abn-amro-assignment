@@ -4,7 +4,7 @@ import Episodes from "./Episodes";
 
 const Season = ({ season, setIsVisible, isVisible }) => {
   return (
-    <div className="flex flex-col pl-5 pt-2" key={season.number}>
+    <div data-testid="season" className="flex flex-col pl-5 pt-2" key={season.number}>
       <div className="flex items-center justify-between">
         <h3 className="font-bold text-lg cursor-pointer text-abnamro-green"
           onClick={() => setIsVisible(!isVisible)}

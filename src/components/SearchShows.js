@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SEARCH_BY_SHOWNAME } from "../utils/config";
 import { Link } from "react-router-dom";
-import { useDebounce } from "../utils/customhooks/useDebounce";
 
 const SearchShows = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,7 +15,6 @@ const SearchShows = () => {
     }
   };
 
-  const debouncedSearch = useDebounce(getSearchResults, 300);
 
   useEffect(() => {
     //we have to make this call after 200ms
@@ -27,7 +25,7 @@ const SearchShows = () => {
   }, [searchQuery]);
 
   return (
-    <div className="flex gap-1">
+    <div data-testid="search-box" className="flex gap-1">
       <h3 className="mr-5 text-xl font-bold text-abnamro-green ">Search:</h3>
       <form className="relative w-[400px]">
         <input
@@ -46,7 +44,7 @@ const SearchShows = () => {
         />
 
         {searchQuery.length !== 0 && showSuggestion  && (
-          <div className=" bg-white border border-abnamro-yellow w-full  absolute top-[30px] z-20">
+          <div data-testid="suggestion-box" className=" bg-white border border-abnamro-yellow w-full  absolute top-[30px] z-20">
             <ul>
               {suggestions.map((suggestion, index) => {
                 return (
@@ -55,6 +53,7 @@ const SearchShows = () => {
                     to={{ pathname: `/show/${suggestion.show.id}` }}
                   >
                     <li
+                      data-testid={`suggestion-item-${suggestion.show.id}`}
                       className="p-2 cursor-pointer hover:bg-gray-200 "
                       key={suggestion.show.id}
                       onClick={() => {

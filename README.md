@@ -41,13 +41,12 @@ Additional Features that I implemented :
 - User Engagement during API data fetch (Shimmer or Loading Indicator)
 
 ## Tech Stack
-- **UI Framework** : React ( Because I have experience and strong fundamental understanding of React and in technical point of view it's easy to develop, it's component-based architecture so we can create modular and reusable code, its virtual DOM minimizes unnecessary DOM manipulations. All these points apply to Vue as well, I am newbie learning Vue, So I thought of completing the assignment in React first and then try to map the conceptual knowledge to Vue to see how these frameworks eventually work in similar fashion. For example : Lifting up state in React is similar to emitting events in Vue, Context API is similar to project/inject in vue, lifecycle hooks of React vs Vue. I know Vue is the framework that I would be working in after joining ABN AMRO, so mind mapping the programming patterns will make it easy to pick up any framwork. We can discuss more on this during the interview)
+- **UI Framework** : React (Because I have experience and strong fundamental understanding of React and in technical point of view it's easy to develop, it's component-based architecture so we can create modular and reusable code, its virtual DOM minimizes unnecessary DOM manipulations. All these points apply to Vue as well, I am newbie learning Vue, So I thought of completing the assignment in React first and then try to map the conceptual knowledge to Vue to see how these frameworks eventually work in similar fashion. For example : Lifting up state in React is similar to emitting events in Vue, Context API is similar to project/inject in vue, lifecycle hooks of React vs Vue. I know Vue is the framework that I would be working in after joining ABN AMRO, so mind mapping the programming patterns will make it easy to pick up any framework. We can discuss more on this during the interview)
 - **Routing** : React Router DOM (Commonly used client-side routing library for react)
 - **CSS Framework** : Tailwind CSS (Tailwind automatically removes all unused CSS when building for production, responsive design with breakpoints, don't have to spend time on writing long css in css files, reusable classes)
+- **Data/State Management** : React in-built techniques like Props drilling, lifting up state and Context API for sharing data (props) between components. I would have used **Redux** as state management library for complex application. Since this app does not have complex data to be globally stored, I did not use any framework for state management. 
 - **Testing Framework** : Jest
 - **Hosting** : Netlify (I thought it will be easy for reviewers to see live demo of the app without having to run scripts)
-
-I would have used **Redux** as state management library for complex application. Since this app does not have any complex data to be globally stored, I did not use any framework for state management. Using props drilling and lifting up state mechanisms to pass props between components.
 
 ## Architecture  
 Based on the requirements, I am planning to use Client-Side Rendering Architecture. I am just using React library without any framework like Next.js as it is not required.
@@ -58,6 +57,7 @@ Based on the requirements, I am planning to use Client-Side Rendering Architectu
 - Clean code (Created utilities for helper functions )
 - Rendering Optimization (Memoized some functions to avoid unnnecessary re-renders)
 - Error handling 
+- Choosing the right state management technique. (props drilling when props need to be passed to child components, lifting up state to parent when siblings component needs info about each other and Context API to store the result of Episodes data to avoid unneccessary API calls )
 - User engagement during API data fetch (Used Shimmer component to provide a visual cue)
 - User Friendly Design (Consistent UI Look)
 

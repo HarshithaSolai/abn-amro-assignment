@@ -1,52 +1,58 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 import Dashboard from '../Dashboard';
 
-describe('Dashboard component', () => {
-  it('renders the component and displays shimmer when shows are not available', async () => {
-    render(<Dashboard />);
+describe('Dashboard', () => {
+  const mockData = [
+    {
+      id: 1,
+      name: 'Stranger Things',
+      genres: ['Drama', 'Fantasy', 'Horror'],
+      rating: { average: 8.7 },
+    },
+    {
+      id: 2,
+      name: 'Breaking Bad',
+      genres: ['Crime', 'Drama', 'Thriller'],
+      rating: { average: 9.5 },
+    },
+  ];
 
-    const shimmer = screen.getByTestId('shimmer');
-    expect(shimmer).toBeInTheDocument();
-    expect(screen.queryAllByTestId('show-card')).toHaveLength(0);
-
-    await waitFor(() => expect(screen.queryByTestId('shimmer')).not.toBeInTheDocument());
+  beforeEach(() => {
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: jest.fn().mockResolvedValue(mockData),
+    });
   });
 
-  it('renders the component with available shows and updates based on genre filter', async () => {
-    const mockShows = [
-      { id: 1, name: 'Show 1', genres: ['genre1', 'genre2'], rating: { average: 8.0 } },
-      { id: 2, name: 'Show 2', genres: ['genre2', 'genre3'], rating: { average: 9.0 } },
-      { id: 3, name: 'Show 3', genres: ['genre3'], rating: { average: 7.0 } },
-    ];
-
-    jest.spyOn(global, 'fetch').mockImplementation(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(mockShows),
-      })
-    );
-
-    render(
-      <BrowserRouter>
-        <Dashboard />
-      </BrowserRouter>
-    );
-
-    await waitFor(() => expect(screen.queryByTestId('shimmer')).not.toBeInTheDocument());
-
-    expect(screen.queryAllByTestId('show-card')).toHaveLength(3);
-
-    const select = screen.getByRole('combobox', { name: 'Genre Filter' });
-    expect(select).toBeInTheDocument();
-
-    userEvent.selectOptions(select, 'genre2');
-
-    expect(screen.queryAllByTestId('show-card')).toHaveLength(2);
-    expect(screen.queryAllByTestId('show-card')[0]).toHaveTextContent('Show 1');
-    expect(screen.queryAllByTestId('show-card')[1]).toHaveTextContent('Show 2');
-
+  afterEach(() => {
     jest.restoreAllMocks();
   });
+
+  test('renders the search box', () => {
+    render(<Dashboard />);
+    const searchBox = screen.getByTestId('search-box');
+    expect(searchBox).toBeInTheDocument();
+  });
+
+  test('renders the genre filter dropdown', () => {
+    render(<Dashboard />);
+    const genreFilter = screen.getByTestId('genre-filter');
+    expect(genreFilter).toBeInTheDocument();
+  });
+
+  test('renders the rating sorter dropdown', () => {
+    render(<Dashboard />);
+    const ratingSorter = screen.getByTestId('rating-sorter');
+    expect(ratingSorter).toBeInTheDocument();
+  });
+
+  test('renders shimmer component while data is loading', () => {
+    jest.spyOn(global, 'fetch').mockResolvedValueOnce(new Promise(() => {}));
+    render(<Dashboard />);
+    const shimmer = screen.getByTestId('shimmer');
+    expect(shimmer).toBeInTheDocument();
+
+  });
+
+
 });

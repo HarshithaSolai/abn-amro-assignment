@@ -11,6 +11,7 @@ const RatingSorter = ({ sortOrder, onSortOrder }) => {
       </h3>
 
       <select
+        data-testid="rating-sorter"
         id="rating-sorter"
         value={sortOrder}
         onChange={onSortOrder}

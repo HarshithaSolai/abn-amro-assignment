@@ -3,15 +3,15 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 const Episode = ({episode, setIsVisible, isVisible  }) => {
   return (
-    <div className="flex flex-col p-5" key={episode.number}>
+    <div className="flex flex-col p-5" data-testid="episode" key={episode.number}>
       <div className="flex items-center justify-between">
         <h3 className="font-bold text-lg cursor-pointer text-abnamro-green" onClick={() => setIsVisible(!isVisible)} >
           Episode : {episode.number} {episode.name}
         </h3>
         {isVisible ? (
-          <SlArrowUp onClick={() => setIsVisible(!isVisible)} className="cursor-pointer"/>
+          <SlArrowUp data-testid="episode-arrow-up" onClick={() => setIsVisible(!isVisible)} className="cursor-pointer"/>
         ) : (
-          <SlArrowDown onClick={() => setIsVisible(!isVisible)} className="cursor-pointer" />
+          <SlArrowDown data-testid="episode-arrow-down" onClick={() => setIsVisible(!isVisible)} className="cursor-pointer" />
         )}
       </div>
       {isVisible && (

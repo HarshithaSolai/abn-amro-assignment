@@ -95,7 +95,7 @@ const Dashboard = () => {
                 to={"/show/" + show.id}
                 key={show.id}
               >
-                <ShowCard {...show} key={show.id} /> 
+                <ShowCard {...show} key={show.id} testId={`show-card-${show.id}`}/> 
               </Link>
             );
           })}

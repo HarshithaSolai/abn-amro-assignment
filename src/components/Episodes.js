@@ -12,7 +12,7 @@ const Episodes = ({ seasonId }) => {
     if (!episodesData || !episodesData[seasonId]) {
       fetchEpisodesData(seasonId);
     }
-  }, [seasonId]);
+  }, [seasonId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const episodes = episodesData && episodesData[seasonId] ? episodesData[seasonId] : [];
 
