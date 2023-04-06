@@ -23,12 +23,12 @@
 - Sort TV shows by rating 
 - Show Details of TV Show through Search suggestion
 - Show Details of TV Show by clicking on the Show Card display in Dashboard
-- Display BasicInfo of the TV show 
+- Display some info of the TV show 
 - Display the Seasons & Episodes List for a given show
 
 Additional Features that I implemented : 
 - Autosuggestion feature for search 
-- Display filter sorted shows and sort filtered shows
+- Filter sorted shows and sort filtered shows
 - Display the Seasons & Episodes List for a given show
 - Toggle Show/Hide of Seasons details using Accordion 
 - Toggle Show/Hide of Episodes details using Accordion 
@@ -41,7 +41,7 @@ Additional Features that I implemented :
 - User Engagement during API data fetch (Shimmer or Loading Indicator)
 
 ## Tech Stack
-- **UI Framework** : React (Because I have experience and strong fundamental understanding of React and in technical point of view it's easy to develop, it's component-based architecture so we can create modular and reusable code, its virtual DOM minimizes unnecessary DOM manipulations. All these points apply to Vue as well, I am newbie learning Vue, So I thought of completing the assignment in React first and then try to map the conceptual knowledge to Vue to see how these frameworks eventually work in similar fashion (of course their differences as well). For example : Lifting up state in React is similar to emitting events in Vue, Context API is similar to project/inject in vue, lifecycle hooks of React vs Vue, Reactivity in React vs Vue. I know Vue is the framework that I would be working in after joining ABN AMRO, so mind mapping the programming patterns will make it easy to pick up any framework. We can discuss more on this during the interview)
+- **UI Framework** : React (Because I have experience and strong fundamental understanding of React and in technical point of view it's easy to develop, it's component-based architecture so we can create modular and reusable code, its virtual DOM minimizes unnecessary DOM manipulations. All these points apply to Vue as well, I am newbie learning Vue, So I thought of completing the assignment in React first and then try to map the conceptual knowledge to Vue to see how these frameworks eventually work in similar fashion (of course embrace their differences as well). For example : Lifting up state in React is similar to emitting events in Vue, Context API is similar to project/inject in vue, lifecycle hooks of React vs Vue, Reactivity in React vs Vue. I know Vue is the framework that I would be working in after joining ABN AMRO, so mind mapping the programming patterns will make it easy to pick up any framework. We can discuss more on this during the interview)
 - **Routing** : React Router DOM (Commonly used client-side routing library for react)
 - **CSS Framework** : Tailwind CSS (Tailwind automatically removes all unused CSS when building for production, responsive design with breakpoints, don't have to spend time on writing long css in css files, reusable classes)
 - **Data/State Management** : React in-built techniques like Props drilling, lifting up state and Context API for sharing data (props) between components. I would have used **Redux** as state management library for complex application. Since this app does not have complex data to be globally stored, I did not use any framework for state management to have minimum scaffholding (which was one of the assignment's requirement). 
@@ -53,9 +53,9 @@ Based on the requirements, I am planning to use Client-Side Rendering Architectu
 
 ### Programming patterns
 - API Performance (Used Debouncing technique to limit the number of API calls to search the TV show)
-- Reusable code (Created components based on single responsibility principle)
-- Clean code (Created utilities for helper functions like fetching API data )
-- Rendering Optimization (Memoized some functions to avoid unnnecessary re-renders)
+- Clean code (Created components based on single responsibility principle)
+- Reusable code (Created utilities for helper functions like fetching API data )
+- Rendering Optimization (Memoized some functions/data to avoid unnnecessary re-renders)
 - Loading and Error handling 
 - Choosing the right state management technique. (props drilling when props need to be passed to child components, lifting up state to parent when siblings component needs info about each other or child needs to pass props to parent, and Context API to store the result of Episodes data to avoid unneccessary API calls )
 - User engagement during API data fetch (Used Shimmer component to provide a visual cue)
@@ -105,7 +105,7 @@ Please check https://abn-amro-assignment.netlify.app/ for live demo.
 If you want to run the app in local, please check next section.
 
 ## Running Scripts
-In the project directory, you can run:
+After cloning the project, you can run the following in the project directory.
 
 ### `yarn install or npm install`
 

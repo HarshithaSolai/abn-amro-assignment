@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "../components/Shimmer";
 import SearchShows from "../components/SearchShows";
 import GenreFilter from "../components/GenreFilter";
 import RatingSorter from "../components/RatingSorter";
 import ShowCard from "../components/ShowCard";
-import { SHOWS_ENDPOINT} from "../utils/config";
+import { SHOWS_ENDPOINT } from "../utils/config";
 import useFetch from "../utils/customhooks/useFetch";
 import { TransitionState } from "../components/TransitionState";
 
@@ -13,60 +13,84 @@ const Dashboard = () => {
   const [shows, setShows] = useState([]);
   const [filteredShows, setFilteredShows] = useState([]);
   const [sortOrder, setSortOrder] = useState("desc");
+// Call the useFetch hook to fetch the shows data
+const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
+  SHOWS_ENDPOINT
+);
 
-  let availableGenres = new Set();
-  if (shows && shows.length > 0) {
-    availableGenres = shows.reduce((acc, show) => {
-      show.genres.forEach((genre) => acc.add(genre));
-      return acc;
-    }, new Set());
-  }
+  const availableGenres = useMemo(() => {
+    let genres = new Set();
+    if (shows && shows.length > 0) {
+      genres = shows.reduce((acc, show) => {
+        show.genres.forEach((genre) => acc.add(genre));
+        return acc;
+      }, new Set());
+    }
+    return genres;
+  }, [shows]);
 
-  const sortShows = (sortOrder, data) => {
-    return [...data].sort((a, b) =>
-      sortOrder === "asc"
-        ? a.rating.average - b.rating.average
-        : b.rating.average - a.rating.average
-    );
-  };
+  
 
-  const handleGenreFilter = (event) => {
-    const selectedGenre = event.target.value;
-    if (selectedGenre === "all") {
-      const sorted = sortShows(sortOrder, shows);
-      setFilteredShows(sorted);
-    } else {
-      const filtered = shows.filter((show) =>
-        show.genres.includes(selectedGenre)
+
+  const sortShows = useCallback(
+    (order, data) => {
+      return [...data].sort((a, b) =>
+        order === "asc"
+          ? a.rating.average - b.rating.average
+          : b.rating.average - a.rating.average
       );
-      const sorted = sortShows(sortOrder, filtered);
-      setFilteredShows(sorted);
+    },
+    []
+  );
+
+  const sortedShows = useMemo(() => {
+    if (showsData && showsData.length > 0) {
+      return sortShows(sortOrder, showsData);
+      console.log("shows DATA AVAIL")
     }
-  };
+    console.log("shows DATA NOTAVAIL")
+    return [];
+  }, [showsData, sortShows]);
 
-  const handleSortOrder = (event) => {
-    const newSortOrder = event.target.value;
-    setSortOrder(newSortOrder);
-    const sorted = sortShows(newSortOrder, filteredShows);
-    setFilteredShows(sorted);
-  };
+  const handleGenreFilter = useCallback(
+    (event) => {
+      console.log("filter")
+      const selectedGenre = event.target.value;
+      if (selectedGenre === "all") {
+        const sorted = sortShows(sortOrder, shows);
+        setFilteredShows(sorted);
+      } else {
+        const filtered = shows.filter((show) =>
+          show.genres.includes(selectedGenre)
+        );
+        const sorted = sortShows(sortOrder, filtered);
+        setFilteredShows(sorted);
+      }
+    },
+    [shows, sortOrder, sortShows]
+  );
 
-  // Call the useFetch hook to fetch the shows data
-  const { data: showsData, loading: showsLoading, error: showsError } = useFetch(SHOWS_ENDPOINT);
+  const handleSortOrder = useCallback(
+    (event) => {
+      console.log("sort")
+      const newSortOrder = event.target.value;
+      setSortOrder(newSortOrder);
+      const sorted = sortShows(newSortOrder, filteredShows);
+      setFilteredShows(sorted);
+    },
+    [filteredShows, sortShows]
+  );
 
-  useEffect(() => {
+  
+  useMemo(() => {
     if (showsData) {
+      console.log("1st memo")
       setShows(showsData);
-      setFilteredShows(showsData);
+      setFilteredShows(sortedShows);
     }
-  }, [showsData]);
+  }, [showsData, sortedShows]);
 
-  useEffect(() => {
-    if (filteredShows && filteredShows.length > 0) {
-      const sorted = sortShows(sortOrder, filteredShows);
-      setFilteredShows(sorted);
-    }
-  }, [filteredShows, sortOrder]);
+  
 
   if (showsError) {
     return <TransitionState type="error-state" />;
@@ -84,7 +108,8 @@ const Dashboard = () => {
       </div>
 
       {showsLoading ? ( // Check if the data is still loading
-        <Shimmer /> // Show shimmer until the data is loaded
+        <Shimmer /> // Show shimmer until the data
+
       ) : (
         <div className="flex flex-wrap gap-5 justify-center">
           {filteredShows.map((show) => {
