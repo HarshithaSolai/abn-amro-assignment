@@ -7,9 +7,9 @@ const ShowCard = ({name, language, image, rating, genres,  }) => {
   }
   
   return (
-    <div data-testid="show-card" className="basis-[210px] mob:basis-[150px] p-2.5 mb-2.5 hover:shadow">
+    <div data-testid="show-card" className="basis-[210px] mob:basis-[150px] xsm:basis-[150px] sm:basis-[150px] p-2.5 mb-2.5 hover:shadow">
       <div  className="w-full">
-        <img data-testid="show-image" className="w-full mob:w-[130px]" src={image?.medium} alt={name}/>      
+        <img data-testid="show-image" className="w-full mob:w-[130px] xsm:w-[130px] sm:w-[130px]" src={image?.medium} alt={name}/>      
       </div>
       <div>
         <h6 data-testid="show-name"  className="text-base font-bold w-full tracking-normal">{name}</h6>

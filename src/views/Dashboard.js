@@ -46,9 +46,7 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
   const sortedShows = useMemo(() => {
     if (showsData && showsData.length > 0) {
       return sortShows(sortOrder, showsData);
-      console.log("shows DATA AVAIL")
     }
-    console.log("shows DATA NOTAVAIL")
     return [];
   }, [showsData, sortShows]);
 
@@ -111,11 +109,11 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
         <Shimmer /> // Show shimmer until the data
 
       ) : (
-        <div className="flex flex-wrap gap-5 justify-center">
+        <div className="flex flex-wrap gap-3 justify-center">
           {filteredShows.map((show) => {
             return (
               <Link
-                className="basis-[210px] p-2.5 mb-2.5 mob:basis-[150px]"
+                className="basis-[210px] p-2.5 mb-2.5 mob:basis-[150px] xsm:basis-[150px] sm:basis-[150px]"
                 to={"/show/" + show.id}
                 key={show.id}
               >

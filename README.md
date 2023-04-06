@@ -65,7 +65,7 @@ Based on the requirements, I am planning to use Client-Side Rendering Architectu
 ### UX
 - Used ABN AMRO Brand Colors and Fonts
 - Simple UI with only required info 
-- Responsive design : Works in all devices and screen sizes.
+- Responsive design : Works in all devices and screen sizes. (mobile, extra-small screens, small screens, medium screens, large and extra-large screens)
 
 ### UI Component Hierarchy
   

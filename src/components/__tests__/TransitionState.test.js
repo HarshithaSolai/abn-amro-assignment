@@ -8,14 +8,14 @@ test("default error", () => {
   expect(error).toHaveTextContent("Unforseen error...");
 });
 
-test("api error", () => {
+test("error state", () => {
   render(<TransitionState type="error-state" />);
   const error = screen.getByTestId("error-state");
   expect(error).toBeInTheDocument();
   expect(error).toHaveTextContent("Something went wrong...");
 });
 
-test("api loading", () => {
+test("loading state", () => {
   render(<TransitionState type="loading-state" />);
   const loading = screen.getByTestId("loading-state");
   expect(loading).toBeInTheDocument();

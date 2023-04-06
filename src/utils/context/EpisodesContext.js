@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { GET_URL_EPISODES } from "../config";
+import { API_BASE_URL, SEASONS_ENPOINT, EPISODES_ENDPOINT } from "../config";
 
 export const EpisodesContext = createContext();
 
@@ -9,7 +9,7 @@ export const EpisodesProvider = ({ children }) => {
   // Function to fetch episodes data for a season and store it in context
   const fetchEpisodesData = async (seasonId) => {
     try {
-      const response = await fetch(`${GET_URL_EPISODES}/${seasonId}/episodes`);
+      const response = await fetch(`${API_BASE_URL}${SEASONS_ENPOINT}/${seasonId}/${EPISODES_ENDPOINT}`);
       const data = await response.json();
     setEpisodesData((prevState) => ({
       ...prevState,
