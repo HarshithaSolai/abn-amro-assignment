@@ -11,10 +11,10 @@ export const EpisodesProvider = ({ children }) => {
     try {
       const response = await fetch(`${GET_URL_EPISODES}/${seasonId}/episodes`);
       const data = await response.json();
-      setEpisodesData((prevState) => ({
-        ...prevState,
+    setEpisodesData((prevState) => ({
+      ...prevState,
         [seasonId]: data,
-      }));
+    }));
     } catch (error) {
       console.error(error);
     }

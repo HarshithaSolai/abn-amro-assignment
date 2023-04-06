@@ -22,8 +22,7 @@ const SearchShows = () => {
       getSearchResults();
     }, DEBOUNCE_DELAY);
     return () => clearTimeout(timer);
-  }, [searchQuery]);
-
+  }, [searchQuery]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div data-testid="search-box" className="flex gap-1">
       <h3 className="mr-5 text-xl font-bold text-abnamro-green ">Search:</h3>
@@ -37,7 +36,7 @@ const SearchShows = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setShowSuggestion(true)}
           onBlur={() => {
-            const timer = setTimeout(() => {
+            setTimeout(() => {
               setShowSuggestion(false);
             }, 300);
           }}

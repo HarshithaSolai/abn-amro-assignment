@@ -1,30 +1,27 @@
-
-
 import { useState, useEffect } from 'react';
+import {API_BASE_URL} from '../config'
 
-export function useFetch(url) {
+const useFetch = (endpoint)  => {
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-        setIsLoading(false);
+        const response = await fetch(`${API_BASE_URL}${endpoint}`);
+        const data = await response.json();
+        setData(data);
       } catch (error) {
         setError(error);
-        setIsLoading(false);
+      } finally {
+        setLoading(false);
       }
-    };
-
+    }
     fetchData();
-  }, [url]);
+  }, [endpoint]);
 
-  return { data, isLoading, error };
+  return { data, loading, error };
 }
+
+export default useFetch;
