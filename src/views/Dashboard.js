@@ -48,11 +48,10 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
       return sortShows(sortOrder, showsData);
     }
     return [];
-  }, [showsData, sortShows]);
+  }, [showsData, sortShows]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleGenreFilter = useCallback(
     (event) => {
-      console.log("filter")
       const selectedGenre = event.target.value;
       if (selectedGenre === "all") {
         const sorted = sortShows(sortOrder, shows);
@@ -70,7 +69,6 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
 
   const handleSortOrder = useCallback(
     (event) => {
-      console.log("sort")
       const newSortOrder = event.target.value;
       setSortOrder(newSortOrder);
       const sorted = sortShows(newSortOrder, filteredShows);
@@ -82,7 +80,6 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
   
   useMemo(() => {
     if (showsData) {
-      console.log("1st memo")
       setShows(showsData);
       setFilteredShows(sortedShows);
     }

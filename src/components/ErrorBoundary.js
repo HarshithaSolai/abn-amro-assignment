@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 
-export function ErrorBoundary(props) {
-  const [hasError, setHasError] = useState(false);
-
-  function handleCatch() {
-    setHasError(true);
+export class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
   }
 
-  if (hasError) {
-    return (
-      <h2 data-testid="error-boundary" className="text-2xl text-abnamro-green">
-        Something went wrong.
-      </h2>
-    );
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
   }
 
-  return (
-    <React.Fragment>
-      {React.Children.map(props.children, (child) =>
-        React.cloneElement(child, {
-          onError: handleCatch,
-        })
-      )}
-    </React.Fragment>
-  );
+  render() {
+    if (this.state.hasError) {
+      return <h2 className="text-2xl text-abnamro-green">
+        Something went wrong. Please try again later.
+      </h2>;
+    }
+
+    return this.props.children;
+  }
 }
