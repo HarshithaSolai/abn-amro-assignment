@@ -13,10 +13,10 @@ const Dashboard = () => {
   const [shows, setShows] = useState([]);
   const [filteredShows, setFilteredShows] = useState([]);
   const [sortOrder, setSortOrder] = useState("desc");
-// Call the useFetch hook to fetch the shows data
-const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
+  // Call the useFetch hook to fetch the shows data
+  const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
   SHOWS_ENDPOINT
-);
+  );
 
   const availableGenres = useMemo(() => {
     let genres = new Set();
@@ -28,9 +28,6 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
     }
     return genres;
   }, [shows]);
-
-  
-
 
   const sortShows = useCallback(
     (order, data) => {
@@ -77,15 +74,12 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
     [filteredShows, sortShows]
   );
 
-  
   useMemo(() => {
     if (showsData) {
       setShows(showsData);
       setFilteredShows(sortedShows);
     }
   }, [showsData, sortedShows]);
-
-  
 
   if (showsError) {
     return <TransitionState type="error-state" />;
@@ -104,7 +98,6 @@ const { data: showsData, loading: showsLoading, error: showsError } = useFetch(
 
       {showsLoading ? ( // Check if the data is still loading
         <Shimmer /> // Show shimmer until the data
-
       ) : (
         <div className="flex flex-wrap gap-3 justify-center">
           {filteredShows.map((show) => {

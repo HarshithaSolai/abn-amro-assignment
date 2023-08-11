@@ -18,11 +18,11 @@ const Seasons = ({ showId }) => {
       )  : (
     <div>
       <h2 data-testid="seasons-heading" className="p-5 mt-2.5 text-3xl font-semibold text-abnamro-green">Information about Seasons and Episodes</h2>
-      {seasons.map((season) => (
+      {seasons.map((season, index) => (
         <Season
           key={season.id}
           season={season}
-          isVisible={visibleSeason === season.id}
+          isVisible={visibleSeason === season.id || (!visibleSeason && index === 0 && (seasons.length === 1))}
           setIsVisible={(display) => {
             if (display) {
               setVisibleSeason(season.id);
